@@ -1,4 +1,4 @@
-const modeExternals = require("webpack-node-externals");
+const nodeExternals = require("webpack-node-externals");
 const paths = require("./paths");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const webpack = require("webpack");
@@ -66,13 +66,23 @@ module.exports = {
             exclude: cssModuleRegex,
             // css-loader/locals 를 사용해야 실제 css 파일을 생성하지 않습니다.
             loader: require.resolve("css-loader/locals"),
+            options: {
+              importLoaders: 1,
+              modules: {
+                exportOnlyLocals: true,
+              },
+            },
           },
           // CSS Module 을 위한 처리
           {
             test: cssModuleRegex,
             loader: require.resolve("css-loader/locals"),
             options: {
-              modules: true,
+              importLoaders: 1,
+              modules: {
+                expotOnlyLocals: ture,
+                getLocalIdent: getCSSModuleLocalIdent,
+              },
             },
           },
           // Sass 를 위한 처리
@@ -80,7 +90,15 @@ module.exports = {
             test: sassRegex,
             exclude: sassModuleRegex,
             use: [
-              require.resolve("css-loader/locals"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 3,
+                  modules: {
+                    exportOnlyLocals: true,
+                  },
+                },
+              },
               require.resolve("sass-loader"),
             ],
           },
@@ -90,9 +108,13 @@ module.exports = {
             exclude: sassModuleRegex,
             use: [
               {
-                loader: require.resolve("css-loader/locals"),
+                loader: require.resolve("css-loader"),
                 options: {
-                  modules: true,
+                  importLoaders: 3,
+                  modules: {
+                    exportOnlyLocals: true,
+                    getLocalIdent: getCSSModuleLocalIdent,
+                  },
                 },
               },
               require.resolve("sass-loader"),
