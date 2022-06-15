@@ -1,4 +1,4 @@
-const modeExternals = requir("webpack-node-externals");
+const modeExternals = require("webpack-node-externals");
 const paths = require("./paths");
 const getCSSModuleLocalIdent = require("react-dev-utils/getCSSModuleLocalIdent");
 const webpack = require("webpack");
@@ -19,7 +19,7 @@ module.exports = {
     path: paths.ssrBuild,
     filename: "server.js",
     chunkFilename: "js/[name].chunk.js", // 정크 파일명
-    publicUrlOrPath, // 정크 파일이 제공될 경로
+    publiicPath: paths.publicUrlOrPath, // 정크 파일이 제공될 경로
   },
   module: {
     rules: [
