@@ -18,7 +18,8 @@ module.exports = {
   output: {
     path: paths.ssrBuild,
     filename: "server.js",
-    chunkFilename: "js/[name].chunk.js",
+    chunkFilename: "js/[name].chunk.js", // 정크 파일명
+    publicUrlOrPath, // 정크 파일이 제공될 경로
   },
   module: {
     rules: [
@@ -34,6 +35,14 @@ module.exports = {
               customize: require.resolve(
                 "babel-preset-react-app/webpack-overrides"
               ),
+              presets: [
+                [
+                  require.resolve("babel-preset-react-app"),
+                  {
+                    runtime: "automatic",
+                  },
+                ],
+              ],
               plugins: [
                 [
                   require.resolve("babel-plugin-named-asset-import"),
