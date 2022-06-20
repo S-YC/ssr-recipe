@@ -13,7 +13,7 @@ const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
 module.exports = {
   mode: "production",
-  entry: paths.ssrIndexJs,
+  entry: paths.ssrindexJs,
   target: "node",
   output: {
     path: paths.ssrBuild,
