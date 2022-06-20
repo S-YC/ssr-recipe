@@ -79,7 +79,7 @@ module.exports = {
             options: {
               importLoaders: 1,
               modules: {
-                expotOnlyLocals: ture,
+                expotOnlyLocals: true,
                 getLocalIdent: getCSSModuleLocalIdent,
               },
             },
