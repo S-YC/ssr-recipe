@@ -64,8 +64,7 @@ module.exports = {
           {
             test: cssRegex,
             exclude: cssModuleRegex,
-            // css-loader/locals 를 사용해야 실제 css 파일을 생성하지 않습니다.
-            loader: require.resolve("css-loader/locals"),
+            loader: require.resolve("css-loader"),
             options: {
               importLoaders: 1,
               modules: {
@@ -76,7 +75,7 @@ module.exports = {
           // CSS Module 을 위한 처리
           {
             test: cssModuleRegex,
-            loader: require.resolve("css-loader/locals"),
+            loader: require.resolve("css-loader"),
             options: {
               importLoaders: 1,
               modules: {
