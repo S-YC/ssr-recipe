@@ -14,7 +14,8 @@ const paths = require("../config/paths");
 function build() {
   console.log("Creating server build...");
   fs.emptyDirSync(paths.ssrBuild);
-  let compiler = webpack(config);
+  const compiler = webpack(config);
+
   return new Promise((resolve, reject) => {
     compiler.run((err, stats) => {
       if (err) {
