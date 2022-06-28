@@ -142,7 +142,4 @@ module.exports = {
   // 서버에서는 굳이 결과물 파일안에 리액트 라이브러리가 들어 있지 않아도 됨.
   // 서버를 위해 번들링할 때는 node_modules에서 불러오는 것을 제외하고 번들링하는 것이 좋음
   externals: [nodeExternals()],
-  plugins: [
-    new webpack.DefinePlugin(env.stringified), // 환경변수 주입
-  ],
 };
