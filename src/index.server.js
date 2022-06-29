@@ -27,5 +27,5 @@ app.use(serverRender);
 
 // 5000포트로 서버 가동
 app.listen(5000, () => {
-  console.log("Running on https://localhost:5000");
+  console.log("Running on http://localhost:5000");
 });
