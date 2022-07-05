@@ -67,6 +67,7 @@ module.exports = {
             loader: require.resolve("css-loader"),
             options: {
               onlyLocals: true,
+              exportOnlyLocals: true,
             },
           },
           // CSS Module 처리
