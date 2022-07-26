@@ -1,20 +1,45 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
+import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import reportWebVitals from "./reportWebVitals";
+import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter } from "react-router-dom";
+import { createStore, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
+import thunk from "redux-thunk";
+import rootReducer, { rootSaga } from "./module.js/index";
+import createSagaMiddelware from "redux-saga";
+import { loadableReady } from "@loadable/component";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </React.StrictMode>
+const sagaMiddleware = createSagaMiddelware();
+
+// store 생성 및 thunk 미들웨어 적용
+const store = createStore(
+    rootReducer,
+    window.__PRELOADED_STATE__, // 이 값을 초기 상태로 사용
+    applyMiddleware(thunk, sagaMiddleware)
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+sagaMiddleware.run(rootSaga);
+
+const Root = () => {
+    return (
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+    );
+};
+
+const root = document.getElementById('root');
+
+if(process.env.NODE_ENV === 'production'){
+    loadableReady(()=>{
+        ReactDOM.hydrate(<Root />, root);
+    });
+}else{
+    ReactDOM.render(<Root />, root);
+}
+
+serviceWorker.unregister();

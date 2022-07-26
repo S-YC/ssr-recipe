@@ -1,16 +1,21 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import Menu from "./components/Menu";
-import BluePage from "./page/BluePage";
-import RedPage from "./page/RedPage";
+import React from 'react';
+import { Route } from 'react-router-dom';
+import Menu from './components/Menu';
+import loadable from '@loadable/component';
+// 스플리팅
+const RedPage = loadable(()=> import('./pages/RedPage'));
+const BluePage = loadable(()=> import('./pages/BluePage'));
+const UsersPage = loadable(()=> import('./pages/UsersPage'));
+
 
 function App() {
   return (
     <div>
-      <Menu />
-      <hr />
-      <Route path="/red" component={RedPage} />
-      <Route path="/blue" component={BluePage} />
+      <Menu/>
+      <hr/>
+      <Route path="/red" component={RedPage}/>
+      <Route path="/blue" component={BluePage}/>
+      <Route path="/users" component={UsersPage}/>
     </div>
   );
 }

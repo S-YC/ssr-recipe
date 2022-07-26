@@ -1,10 +1,10 @@
-.Red {
-  background: red;
-  font-size: 1.5rem;
-  color: white;
-  width: 128px;
-  height: 128px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.Red{
+    background-color: red;
+    font-size: 1.5rem;
+    color: white;
+    width: 128px;
+    height: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
